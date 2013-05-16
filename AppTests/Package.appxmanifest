@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Package xmlns="http://schemas.microsoft.com/appx/2010/manifest">
+  <Identity Name="17598MatthewM.Mistrzdedukcji" Publisher="CN=7EA8B0FD-072E-4D08-BCF3-7F8A95CEA1AE" Version="1.0.0.2" />
+  <Properties>
+    <DisplayName>Mistrz dedukcji</DisplayName>
+    <PublisherDisplayName>MatthewM</PublisherDisplayName>
+    <Logo>Assets\StoreLogo.png</Logo>
+  </Properties>
+  <Prerequisites>
+    <OSMinVersion>6.2.1</OSMinVersion>
+    <OSMaxVersionTested>6.2.1</OSMaxVersionTested>
+  </Prerequisites>
+  <Resources>
+    <Resource Language="x-generate" />
+  </Resources>
+  <Applications>
+    <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="AppTests.App">
+      <VisualElements DisplayName="Mistrz deduckji" Logo="Assets\Logo.png" SmallLogo="Assets\SmallLogo.png" Description="Celem gry jest wydedukowanie, wylosowanego przez grę, układu kolorów na podstawieczarnych oraz  białych punktów przyznawanych przez grę przy sprawdzaniu każdego ruchu." ForegroundText="light" BackgroundColor="#07719b">
+        <DefaultTile ShowName="allLogos" WideLogo="Assets\wideLogo.png" />
+        <SplashScreen Image="Assets\SplashScreen.png" BackgroundColor="#07719b" />
+        <InitialRotationPreference>
+          <Rotation Preference="portrait" />
+          <Rotation Preference="landscape" />
+          <Rotation Preference="portraitFlipped" />
+          <Rotation Preference="landscapeFlipped" />
+        </InitialRotationPreference>
+      </VisualElements>
+    </Application>
+  </Applications>
+</Package>

@@ -1,0 +1,33 @@
+﻿<UserControl
+    x:Class="CallistoSettings.SettingsViews.About"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:CallistoSettings.SettingsViews"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="768"
+    d:DesignWidth="346" Width="346"><!-- Height="768">-->
+
+    <Grid ScrollViewer.HorizontalScrollMode="Enabled">
+        <Grid.Background>
+            <SolidColorBrush Color="White"/>
+        </Grid.Background>
+        <StackPanel Margin="0 0 80 0" Background="White">
+
+            <TextBlock TextWrapping="Wrap" Foreground="Black" FontSize="20" Margin="0 0 0 5">
+                Gra "Mistrz dedukcji" jest grą logiczną, która została zainspirowana przez grę "Mastermind".
+            </TextBlock>
+            <TextBlock TextWrapping="Wrap" Foreground="Black" FontSize="20" Margin="0 0 0 5">
+                Zasady gry dotyczące oceny ruchów zostały zaimplementowane zdognie z&#160;zasadami gry "Mastermind".
+            </TextBlock>
+            <TextBlock TextWrapping="Wrap" Foreground="Black" FontSize="20" Margin="0 0 0 5">
+                System obsługi i&#160;oceny gry zostały zaimplementowany wedle własnych pomysłów.
+            </TextBlock>
+            <TextBlock TextWrapping="Wrap" Foreground="Black" FontSize="20" Margin="0 0 0 5">
+                Zasady oceny gry zostały szczegółowo opolisane w&#160;sekcji "Jak grać?".
+            </TextBlock>
+        </StackPanel>
+    </Grid>
+    
+</UserControl>

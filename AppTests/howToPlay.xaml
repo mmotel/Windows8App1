@@ -1,0 +1,468 @@
+﻿<common:LayoutAwarePage
+    x:Name="pageRoot"
+    x:Class="AppTests.howToPlay"
+    DataContext="{Binding DefaultViewModel, RelativeSource={RelativeSource Self}}"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:AppTests"
+    xmlns:common="using:AppTests.Common"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Page.Resources>
+
+        <!-- TODO: Delete this line if the key AppName is declared in App.xaml -->
+        <x:String x:Key="AppName">Jak grać?</x:String>
+    </Page.Resources>
+
+    <!--
+        This grid acts as a root panel for the page that defines two rows:
+        * Row 0 contains the back button and page title
+        * Row 1 contains the rest of the page layout
+    -->
+    <Grid Style="{StaticResource LayoutRootStyle}">
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="{StaticResource MyBackgroundColor}" Offset="0.339"/>
+                <GradientStop Color="#FF082337"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="140"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Back button and page title -->
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="backButton" Click="GoBack" IsEnabled="{Binding Frame.CanGoBack, ElementName=pageRoot}" Style="{StaticResource BackButtonStyle}"/>
+            <TextBlock x:Name="pageTitle" Grid.Column="1" Text="{StaticResource AppName}" Style="{StaticResource PageHeaderTextStyle}"/>
+        </Grid>
+        <!-- content -->
+        <ScrollViewer Grid.Row="2" Grid.Column="2" Padding="5">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100" x:Name="leftMargin"></ColumnDefinition>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                    <ColumnDefinition Width="100" x:Name="rightMargin"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"></RowDefinition>
+                </Grid.RowDefinitions>
+             
+                
+                <StackPanel Grid.Column="1" Grid.Row="0" Margin="5">
+                    <TextBlock Foreground="White" Text="Zasady gry" Style="{StaticResource PageHeaderTextStyle}"/>
+                    <TextBlock Foreground="White" Margin="3" FontSize="24" TextWrapping="Wrap">
+                        Celem gry jest wydedukowanie, wylosowanego przez grę, układu kolorów na podstawie 
+                        <Bold>czarnych</Bold> oraz <Bold>białych</Bold> punktów przyznawanych przez grę przy 
+                        sprawdzaniu każdego ruchu. 
+                    </TextBlock>
+                    <TextBlock Foreground="White" Margin="3" FontSize="24" TextWrapping="Wrap">
+                        <Bold>Czarne punkty</Bold> są przyznawane za umieszczenie dobrego koloru na dobrej pozycji.
+                    </TextBlock>
+                    <TextBlock Foreground="White" Margin="3" FontSize="24" TextWrapping="Wrap">
+                        <Bold>Białe punkty</Bold> są przyznawane za umieszczenie dobrego koloru na złej pozycji.
+                        Przy przyznawaniu białych punktów nie są brane pod uwagę pozycje, na których znajdują się kolory,
+                        za które zostały przyznane czarne punkty.
+                    </TextBlock>
+                    <Viewbox >
+                        <StackPanel Orientation="Horizontal">
+                            <StackPanel Margin="5">
+                                <Ellipse Fill="Black" Width="15" Height="15"  MaxHeight="20"
+                                             VerticalAlignment="Center" HorizontalAlignment="Center"/>
+
+                            </StackPanel>
+                            <StackPanel Margin="5">
+                                <Ellipse Fill="Red" Width="15" Height="15"  MaxHeight="20"
+                                             VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            </StackPanel>
+                            <StackPanel Margin="5">
+                                <Ellipse Fill="White" Width="15" Height="15"  MaxHeight="20"
+                                             VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+                            </StackPanel>
+                            <StackPanel Margin="5">
+                                <Ellipse Fill="Green" Width="15" Height="15"  MaxHeight="20"
+                                             VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+                            </StackPanel>
+                            <StackPanel Margin="5">
+                                <Ellipse Fill="Blue" Width="15" Height="15"  MaxHeight="20"
+                                             VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+                            </StackPanel>
+                            <Border CornerRadius="2,2,2,2" BorderThickness="2,2,0,2">
+                                <StackPanel Background="Black" Width="20"  MaxHeight="20" Margin="0">
+                                    <TextBlock Text="1" Foreground="White" Margin="0 3 0 0 "  HorizontalAlignment="Center"/>
+                                </StackPanel>
+                            </Border>
+                            <Border CornerRadius="2,2,2,2" BorderThickness="0,2,2,2">
+                                <StackPanel Background="White" Width="20"  MaxHeight="20" Margin="0">
+                                    <TextBlock Text="2" Foreground="Black" Margin="0 3 0 0 " HorizontalAlignment="Center"/>
+                                </StackPanel>
+                            </Border>
+                        </StackPanel>
+                    </Viewbox>
+                    <TextBlock Foreground="White" Margin="3 3 3 15" FontSize="24" TextWrapping="Wrap">
+                        W powyższym przypadku układ został oceniony na jeden punkt czarny oraz dwa punkty białe. Oznacza to,
+                        że jeden z&#160;kolorów znajduje się już na swoim miejscu a&#160;dwa kolejne również są w&#160;wylosowanym układzie 
+                        ale znajdują sie w&#160;niewłaściwych miejscu.
+                    </TextBlock>
+                    <TextBlock Foreground="White" Text="Układy kolorów" Style="{StaticResource PageHeaderTextStyle}"/>
+                    <TextBlock Foreground="White" Margin="3" FontSize="24" TextWrapping="Wrap">
+                        Układ kolorów na poziomie <Bold>łatwym</Bold> zawiera <Bold>trzy</Bold> kolory: czarny, czerwony oraz niebieski.
+                    </TextBlock>
+                    <Viewbox Height="150">
+                        <StackPanel Orientation="Horizontal">
+                            <StackPanel Margin="5">
+                                <Ellipse Fill="Black" Width="15" Height="15"  MaxHeight="20"
+                                             VerticalAlignment="Center" HorizontalAlignment="Center"/>
+
+                            </StackPanel>
+                            <StackPanel Margin="5">
+                                <Ellipse Fill="Red" Width="15" Height="15"  MaxHeight="20"
+                                             VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            </StackPanel>
+                            <StackPanel Margin="5">
+                                <Ellipse Fill="Blue" Width="15" Height="15"  MaxHeight="20"
+                                             VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Viewbox>
+                    <TextBlock Foreground="White" Margin="3" FontSize="24" TextWrapping="Wrap">
+                        Układ kolorów na poziomie <Bold>normalnym</Bold> zawiera <Bold>pięć</Bold> kolory: 
+                        czarny, czerwony, niebieski, biały oraz zielony.
+                    </TextBlock>
+                    <Viewbox Height="150">
+                        <StackPanel Orientation="Horizontal">
+                            <StackPanel Margin="5">
+                                <Ellipse Fill="Black" Width="15" Height="15"  MaxHeight="20"
+                                             VerticalAlignment="Center" HorizontalAlignment="Center"/>
+
+                            </StackPanel>
+                            <StackPanel Margin="5">
+                                <Ellipse Fill="Red" Width="15" Height="15"  MaxHeight="20"
+                                             VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            </StackPanel>
+                            <StackPanel Margin="5">
+                                <Ellipse Fill="Blue" Width="15" Height="15"  MaxHeight="20"
+                                             VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+                            </StackPanel>
+                            <StackPanel Margin="5">
+                                <Ellipse Fill="White" Width="15" Height="15"  MaxHeight="20"
+                                             VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+                            </StackPanel>
+                            <StackPanel Margin="5">
+                                <Ellipse Fill="Green" Width="15" Height="15"  MaxHeight="20"
+                                             VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Viewbox>
+                    <TextBlock Foreground="White" Margin="3" FontSize="24" TextWrapping="Wrap">
+                        Układ kolorów na poziomie <Bold>trudnym</Bold> zawiera <Bold>siedem</Bold> kolory: 
+                        czarny, czerwony, niebieski, biały, zielony, pomarańczowy oraz brązowy.
+                    </TextBlock>
+                    <Viewbox Height="150" Margin="0 0 0 15">
+                        <StackPanel Orientation="Horizontal">
+                            <StackPanel Margin="5">
+                                <Ellipse Fill="Black" Width="15" Height="15"  MaxHeight="20"
+                                             VerticalAlignment="Center" HorizontalAlignment="Center"/>
+
+                            </StackPanel>
+                            <StackPanel Margin="5">
+                                <Ellipse Fill="Red" Width="15" Height="15"  MaxHeight="20"
+                                             VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            </StackPanel>
+                            <StackPanel Margin="5">
+                                <Ellipse Fill="Blue" Width="15" Height="15"  MaxHeight="20"
+                                             VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+                            </StackPanel>
+                            <StackPanel Margin="5">
+                                <Ellipse Fill="White" Width="15" Height="15"  MaxHeight="20"
+                                             VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+                            </StackPanel>
+                            <StackPanel Margin="5">
+                                <Ellipse Fill="Green" Width="15" Height="15"  MaxHeight="20"
+                                             VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+                            </StackPanel>
+                            <StackPanel Margin="5">
+                                <Ellipse Fill="Orange" Width="15" Height="15"  MaxHeight="20"
+                                             VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+                            </StackPanel>
+                            <StackPanel Margin="5">
+                                <Ellipse Fill="Brown" Width="15" Height="15"  MaxHeight="20"
+                                             VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Viewbox>
+                    <TextBlock Foreground="White" Text="Obsługa interfejsu" Style="{StaticResource PageHeaderTextStyle}"/>
+                    <TextBlock Foreground="White" Margin="3" FontSize="24" TextWrapping="Wrap">
+                        Aby wybrać układ kolorów, który chcemy sprawdzić i&#160;otrzymać ocenę należy użyć <Bold>strzałek</Bold> znajdujących 
+                        się nad oraz pod kółkiem symbolizującym obecnie wybrany kolor. <Bold>Strzałka</Bold> 
+                        nad służy do zmiany na <Bold>kolejny</Bold> kolor w układzie, nastomiast <Bold>strzałka pod</Bold> słyży 
+                        do zmiany na <Bold>poprzedni</Bold> kolor w&#160;układzie. Po wybraniu układu należy użyć przycisku <Bold>sprawdź</Bold>
+                        aby dokonać sprawdzenia i&#160;oceny ruchu. Spróbuj sam.
+                    </TextBlock>
+                    <Viewbox x:Name="makeMove">
+                        <StackPanel Orientation="Horizontal" Margin="5,0,5,0">
+                            <!-- pozycja 1 -->
+                            <StackPanel Orientation="Vertical" Margin="1">
+                                <Button Width="17" Height="17" Margin="1" BorderThickness="0" Click="Button_Click_1" Content="0" HorizontalAlignment="Center">
+                                    <Button.Template>
+                                        <ControlTemplate TargetType="Button">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="9*"/>
+                                                    <ColumnDefinition Width="8*"/>
+                                                </Grid.ColumnDefinitions>
+                                                <Path Data="M 6 6 L 8 9 4 9 Z" StrokeThickness="2" StrokeLineJoin="Round"
+                    						Stroke="{Binding Value1NormalNextColor, Mode=OneWay}" Fill="{Binding Value1NormalNextColor, Mode=OneWay}"  Stretch="Fill" UseLayoutRounding="False" Grid.ColumnSpan="2" Height="15" Width="17" VerticalAlignment="Bottom" />
+                                            </Grid>
+                                        </ControlTemplate>
+                                    </Button.Template>
+                                </Button>
+                                <Ellipse Width="25" Height="25" Stroke="{Binding Value1Color, Mode=OneWay}" StrokeThickness="15"  Margin="0 2"/>
+
+                                <Button Width="17" Height="17" Margin="1" BorderThickness="0" Click="Button_Click_1_Down" Content="0" HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5">
+                                    <Button.RenderTransform>
+                                        <CompositeTransform Rotation="180"/>
+                                    </Button.RenderTransform>
+                                    <Button.Template>
+                                        <ControlTemplate TargetType="Button">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="9*"/>
+                                                    <ColumnDefinition Width="8*"/>
+                                                </Grid.ColumnDefinitions>
+                                                <Path Data="M 6 6 L 8 9 4 9 Z" StrokeThickness="2" StrokeLineJoin="Round"
+                    						Stroke="{Binding Value1NormalPrevColor, Mode=OneWay}" Fill="{Binding Value1NormalPrevColor, Mode=OneWay}"  Stretch="Fill" UseLayoutRounding="False" Grid.ColumnSpan="2" Height="15" Width="17" VerticalAlignment="Bottom" />
+                                            </Grid>
+                                        </ControlTemplate>
+                                    </Button.Template>
+                                </Button>
+                            </StackPanel>
+
+                            <!-- pozycja 2 -->
+                            <StackPanel Orientation="Vertical"  Margin="1">
+                                <Button Width="17" Height="17" Margin="1" BorderThickness="0" Click="Button_Click_2" Content="0" HorizontalAlignment="Center">
+                                    <Button.Template>
+                                        <ControlTemplate TargetType="Button">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="9*"/>
+                                                    <ColumnDefinition Width="8*"/>
+                                                </Grid.ColumnDefinitions>
+                                                <Path Data="M 6 6 L 8 9 4 9 Z" StrokeThickness="2" StrokeLineJoin="Round"
+                    						Stroke="{Binding Value2NormalNextColor, Mode=OneWay}" Fill="{Binding Value2NormalNextColor, Mode=OneWay}"  Stretch="Fill" UseLayoutRounding="False" Grid.ColumnSpan="2" Height="15" Width="17" VerticalAlignment="Bottom" />
+                                            </Grid>
+                                        </ControlTemplate>
+                                    </Button.Template>
+                                </Button>
+                                <Ellipse Width="25" Height="25" Stroke="{Binding Value2Color, Mode=OneWay}" StrokeThickness="15" Margin="0 2"/>
+
+                                <Button Width="17" Height="17" Margin="1" BorderThickness="0" Click="Button_Click_2_Down" Content="0" HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5">
+                                    <Button.RenderTransform>
+                                        <CompositeTransform Rotation="180"/>
+                                    </Button.RenderTransform>
+                                    <Button.Template>
+                                        <ControlTemplate TargetType="Button">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="9*"/>
+                                                    <ColumnDefinition Width="8*"/>
+                                                </Grid.ColumnDefinitions>
+                                                <Path Data="M 6 6 L 8 9 4 9 Z" StrokeThickness="2" StrokeLineJoin="Round"
+                    						Stroke="{Binding Value2NormalPrevColor, Mode=OneWay}" Fill="{Binding Value2NormalPrevColor, Mode=OneWay}"  Stretch="Fill" UseLayoutRounding="False" Grid.ColumnSpan="2" Height="15" Width="17" VerticalAlignment="Bottom" />
+                                            </Grid>
+                                        </ControlTemplate>
+                                    </Button.Template>
+                                </Button>
+                            </StackPanel>
+
+                            <!-- pozycja 3 -->
+                            <StackPanel Orientation="Vertical" Margin="1">
+                                <Button Width="17" Height="17" Margin="1" BorderThickness="0" Click="Button_Click_3" Content="0" HorizontalAlignment="Center">
+                                    <Button.Template>
+                                        <ControlTemplate TargetType="Button">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="9*"/>
+                                                    <ColumnDefinition Width="8*"/>
+                                                </Grid.ColumnDefinitions>
+                                                <Path Data="M 6 6 L 8 9 4 9 Z" StrokeThickness="2" StrokeLineJoin="Round"
+                    						Stroke="{Binding Value3NormalNextColor, Mode=OneWay}" Fill="{Binding Value3NormalNextColor, Mode=OneWay}"  Stretch="Fill" UseLayoutRounding="False" Grid.ColumnSpan="2" Height="15" Width="17" VerticalAlignment="Bottom" />
+                                            </Grid>
+                                        </ControlTemplate>
+                                    </Button.Template>
+                                </Button>
+                                <Ellipse Width="25" Height="25" Stroke="{Binding Value3Color, Mode=OneWay}" StrokeThickness="15" Margin="0 2"/>
+
+                                <Button Width="17" Height="17" Margin="1" BorderThickness="0" Click="Button_Click_3_Down" Content="0" HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5">
+                                    <Button.RenderTransform>
+                                        <CompositeTransform Rotation="180"/>
+                                    </Button.RenderTransform>
+                                    <Button.Template>
+                                        <ControlTemplate TargetType="Button">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="9*"/>
+                                                    <ColumnDefinition Width="8*"/>
+                                                </Grid.ColumnDefinitions>
+                                                <Path Data="M 6 6 L 8 9 4 9 Z" StrokeThickness="2" StrokeLineJoin="Round"
+                    						Stroke="{Binding Value3NormalPrevColor, Mode=OneWay}" Fill="{Binding Value3NormalPrevColor, Mode=OneWay}"  Stretch="Fill" UseLayoutRounding="False" Grid.ColumnSpan="2" Height="15" Width="17" VerticalAlignment="Bottom" />
+                                            </Grid>
+                                        </ControlTemplate>
+                                    </Button.Template>
+                                </Button>
+                            </StackPanel>
+
+                            <!-- pozycja 4 -->
+                            <StackPanel Orientation="Vertical"  Margin="1">
+                                <Button Width="17" Height="17" Margin="1" BorderThickness="0" Click="Button_Click_4" Content="0" HorizontalAlignment="Center">
+                                    <Button.Template>
+                                        <ControlTemplate TargetType="Button">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="9*"/>
+                                                    <ColumnDefinition Width="8*"/>
+                                                </Grid.ColumnDefinitions>
+                                                <Path Data="M 6 6 L 8 9 4 9 Z" StrokeThickness="2" StrokeLineJoin="Round"
+                    						Stroke="{Binding Value4NormalNextColor, Mode=OneWay}" Fill="{Binding Value4NormalNextColor, Mode=OneWay}"  Stretch="Fill" UseLayoutRounding="False" Grid.ColumnSpan="2" Height="15" Width="17" VerticalAlignment="Bottom" />
+                                            </Grid>
+                                        </ControlTemplate>
+                                    </Button.Template>
+                                </Button>
+                                <Ellipse Width="25" Height="25" Stroke="{Binding Value4Color, Mode=OneWay}" StrokeThickness="15"  Margin="0 2"/>
+
+                                <Button Width="17" Height="17" Margin="1" BorderThickness="0" Click="Button_Click_4_Down" Content="0" HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5">
+                                    <Button.RenderTransform>
+                                        <CompositeTransform Rotation="180"/>
+                                    </Button.RenderTransform>
+                                    <Button.Template>
+                                        <ControlTemplate TargetType="Button">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="9*"/>
+                                                    <ColumnDefinition Width="8*"/>
+                                                </Grid.ColumnDefinitions>
+                                                <Path Data="M 6 6 L 8 9 4 9 Z" StrokeThickness="2" StrokeLineJoin="Round"
+                    						Stroke="{Binding Value4NormalPrevColor, Mode=OneWay}" Fill="{Binding Value4NormalPrevColor, Mode=OneWay}"  Stretch="Fill" UseLayoutRounding="False" Grid.ColumnSpan="2" Height="15" Width="17" VerticalAlignment="Bottom" />
+                                            </Grid>
+                                        </ControlTemplate>
+                                    </Button.Template>
+                                </Button>
+                            </StackPanel>
+
+                            <!-- pozycja 5 -->
+                            <StackPanel Orientation="Vertical" Margin="1">
+                                <Button Width="17" Height="17" Margin="1" BorderThickness="0" Click="Button_Click_5" Content="0" HorizontalAlignment="Center">
+                                    <Button.Template>
+                                        <ControlTemplate TargetType="Button">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="9*"/>
+                                                    <ColumnDefinition Width="8*"/>
+                                                </Grid.ColumnDefinitions>
+                                                <Path Data="M 6 6 L 8 9 4 9 Z" StrokeThickness="2" StrokeLineJoin="Round"
+                    						Stroke="{Binding Value5NormalNextColor, Mode=OneWay}" Fill="{Binding Value5NormalNextColor, Mode=OneWay}"  Stretch="Fill" UseLayoutRounding="False" Grid.ColumnSpan="2" Height="15" Width="17" VerticalAlignment="Bottom" />
+                                            </Grid>
+                                        </ControlTemplate>
+                                    </Button.Template>
+                                </Button>
+                                <Ellipse Width="25" Height="25" Stroke="{Binding Value5Color, Mode=OneWay}" StrokeThickness="15" Margin="0 2"/>
+
+                                <Button Width="17" Height="17" Margin="1" BorderThickness="0" Click="Button_Click_5_Down" Content="0" HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5">
+                                    <Button.RenderTransform>
+                                        <CompositeTransform Rotation="180"/>
+                                    </Button.RenderTransform>
+                                    <Button.Template>
+                                        <ControlTemplate TargetType="Button">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="9*"/>
+                                                    <ColumnDefinition Width="8*"/>
+                                                </Grid.ColumnDefinitions>
+                                                <Path Data="M 6 6 L 8 9 4 9 Z" StrokeThickness="2" StrokeLineJoin="Round"
+                    						Stroke="{Binding Value5NormalPrevColor, Mode=OneWay}" Fill="{Binding Value5NormalPrevColor, Mode=OneWay}"  Stretch="Fill" UseLayoutRounding="False" Grid.ColumnSpan="2" Height="15" Width="17" VerticalAlignment="Bottom" />
+                                            </Grid>
+                                        </ControlTemplate>
+                                    </Button.Template>
+                                </Button>
+                            </StackPanel>
+
+                            <!-- sprawdź -->
+                            <Button Width="auto" Background="White" Foreground="Black" BorderThickness="0" Content="sprawdź" x:Name="checkButton"></Button>
+                        </StackPanel>
+                    </Viewbox>
+                    <TextBlock Foreground="White" Margin="3 3 3 15" FontSize="24" TextWrapping="Wrap">
+                        Kolor <Bold>strzałki nad</Bold> pokazuje <Bold>kolejny</Bold> kolor w&#160;układzie. Natomiast kolor 
+                        <Bold>strzałki pod</Bold> pokazuje <Bold>poprzedni</Bold> kolor w&#160;układzie. Powyżej został zaprezentowany
+                        interfejs z&#160;poziomu normalnego.
+                    </TextBlock>
+                    <TextBlock Foreground="White" Text="Sposób oceny gry" Style="{StaticResource PageHeaderTextStyle}"/>
+                    <TextBlock Foreground="White" Margin="3" FontSize="24" TextWrapping="Wrap">
+                        Gra jest oceniana na podstawie wybranego poziomu oraz ilości wykonanych ruchów.
+                    </TextBlock>
+                    <TextBlock Foreground="White" Margin="3" FontSize="24" TextWrapping="Wrap">
+                        Na poziomie <Bold>łatwym</Bold> za wygraną otrzymujesz <Bold>500</Bold> punktów. Na tym poziomie za
+                        "przyzwoitą" granicę ilości ruchów uznane zostało <Bold>9</Bold>&#160;ruchów. Za każdy ruch, którego zabraknie 
+                        do <Bold>9</Bold>&#160;ruchów otrzymujesz <Bold>50</Bold> punktów. Dla przykładu, jeśli wygrasz w&#160;4&#160;ruchach otrzymasz
+                        500 punktów za wygraną oraz po 50 punktów za 5&#160;ruchów, co łącznie daje 750 punktów.
+                    </TextBlock>
+                    <TextBlock Foreground="White" Margin="3" FontSize="24" TextWrapping="Wrap">
+                        Na poziomie <Bold>normalnym</Bold> za wygraną otrzymujesz <Bold>1000</Bold> punktów. Na tym poziomie za
+                        "przyzwoitą" granicę ilości ruchów uznane zostało <Bold>25</Bold> ruchów. Za każdy ruch, którego zabraknie 
+                        do <Bold>25</Bold> ruchów otrzymujesz <Bold>75</Bold> punktów. Dla przykładu, jeśli wygrasz w&#160;14 ruchach otrzymasz
+                        1000 punktów za wygraną oraz po 75 punktów za 9&#160;ruchów, co łącznie daje 1675 punktów.
+                    </TextBlock>
+                    <TextBlock Foreground="White" Margin="3 3 3 15" FontSize="24" TextWrapping="Wrap">
+                        Na poziomie <Bold>trudnym</Bold> za wygraną otrzymujesz <Bold>1500</Bold> punktów. Na tym poziomie za
+                        "przyzwoitą" granicę ilości ruchów uznane zostało <Bold>35</Bold> ruchów. Za każdy ruch, którego zabraknie 
+                        do <Bold>35</Bold> ruchów otrzymujesz <Bold>100</Bold> punktów. Dla przykładu, jeśli wygrasz w&#160;21 ruchach otrzymasz
+                        1500 punktów za wygraną oraz po 100 punktów za 14 ruchów, co łącznie daje 2900 punktów. 
+                    </TextBlock>
+                </StackPanel>
+                
+            </Grid>
+        </ScrollViewer>
+
+        <VisualStateManager.VisualStateGroups>
+
+            <!-- Visual states reflect the application's view state -->
+            <VisualStateGroup x:Name="ApplicationViewStates">
+                <VisualState x:Name="FullScreenLandscape"/>
+                <VisualState x:Name="Filled"/>
+
+                <!-- The entire page respects the narrower 100-pixel margin convention for portrait -->
+                <VisualState x:Name="FullScreenPortrait">
+                    <Storyboard>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="backButton" Storyboard.TargetProperty="Style">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PortraitBackButtonStyle}"/>
+                        </ObjectAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+
+                <!-- The back button and title have different styles when snapped -->
+                <VisualState x:Name="Snapped">
+                    <Storyboard>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="backButton" Storyboard.TargetProperty="Style">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource SnappedBackButtonStyle}"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="pageTitle" Storyboard.TargetProperty="Style">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource SnappedPageHeaderTextStyle}"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="leftMargin" Storyboard.TargetProperty="Width">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="0"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="rightMargin" Storyboard.TargetProperty="Width">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="0"/>
+                        </ObjectAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+    </Grid>
+</common:LayoutAwarePage>
