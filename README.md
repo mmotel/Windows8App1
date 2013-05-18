@@ -1,5 +1,5 @@
 #Windows8App1: Mistrz dedukcji
-##Przedmiot: [Tecgnologie .NET](http://inf.ug.edu.pl/-net?url=mod/article.php&id=673)
+##Przedmiot: [Technologie .NET](http://inf.ug.edu.pl/-net?url=mod/article.php&id=673)
 ###Rok akademicki 2012/13 , semestr letni
 
 Aplikacja stworzona na zaliczenie laboratoriów.
